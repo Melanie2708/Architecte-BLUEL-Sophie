@@ -4,7 +4,7 @@ async function recupererProjets (){
 return projets;
 }
 
-
+//Fonction pour afficher les travaux
 function afficherProjets(projets){
     for (let i = 0; i < projets.length; i++) {
         const projet = projets [i];
@@ -23,3 +23,8 @@ function afficherProjets(projets){
 		figure.appendChild(caption);
 }}
 recupererProjets().then(projets =>{afficherProjets(projets);});
+
+//Fonction pour les filtres
+
+const btnObjets = document.querySelector(".btnObjets");
+
