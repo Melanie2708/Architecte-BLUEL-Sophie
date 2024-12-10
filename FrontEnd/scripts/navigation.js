@@ -1,4 +1,4 @@
-export function afficherPage(page, lien) {
+//export function afficherPage(page, lien) {
   const listePage = document.querySelectorAll(".page");
   for (let i = 0; i < listePage.length; i++) {
     listePage[i].classList.remove("active");
@@ -13,7 +13,7 @@ export function afficherPage(page, lien) {
   lien.classList.add("actif");
 }
 
-export function ajoutClicNavigation() {
+//export function ajoutClicNavigation() {
   const lienProjet = document.getElementById("lien-projet");
   lienProjet.addEventListener("click", function (event) {
     afficherPage("page-principale", event.target);
