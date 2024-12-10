@@ -133,6 +133,7 @@ body {
   margin: auto;
   font-family: "Work Sans";
   font-size: 14px;
+  background-color: #fffef8;
 }
 header {
   display: flex;
@@ -179,6 +180,7 @@ li:hover {
 }
 li a {
   text-decoration: none;
+  color: black;
 }
 .page {
   display: none;
@@ -190,32 +192,32 @@ li a {
 .actif {
   font-weight: bold;
 }
-.login {
+#login {
   display: flex;
   flex-direction: column;
   text-align: center;
   width: 40%;
   margin: auto;
 }
-.login h2 {
+#login h2 {
   margin-bottom: 30px;
 }
 
-.login form {
+#login form {
   display: flex;
   flex-direction: column;
   text-align: left;
 }
-.login label {
+#login label {
   margin-bottom: 10px;
   margin-top: 20px;
 }
-.login input {
+#login input {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
   height: 40px;
 }
-.login a {
+#login a {
   text-decoration: underline;
   margin-bottom: 50px;
 }
@@ -325,7 +327,7 @@ footer nav ul {
   color: #1d6154;
   min-width: 100px;
   text-align: center;
-  background-color: white;
+  background-color: #fffef8;
 }
 
 .filtre-actif {
