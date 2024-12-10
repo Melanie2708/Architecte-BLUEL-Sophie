@@ -177,6 +177,16 @@ nav li {
 li:hover {
   color: #b1663c;
 }
+.page {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+.actif {
+  font-weight: bold;
+}
 #introduction {
   display: flex;
   align-items: center;

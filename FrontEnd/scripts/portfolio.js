@@ -1,3 +1,4 @@
+import { ajoutClicNavigation } from "./navigation.js";
 //Fonction pour afficher les travaux
 
 async function recupererProjets() {
@@ -73,7 +74,7 @@ function afficherCategories(categories) {
 //Partie principale du script
 
 let tousProjets = {};
-
+ajoutClicNavigation();
 recupererProjets().then((projets) => {
   tousProjets = projets;
   afficherProjets(tousProjets, 0);
