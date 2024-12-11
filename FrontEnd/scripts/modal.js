@@ -44,3 +44,21 @@ window.addEventListener("keydown", function (event) {
     focusInModal(event);
   }
 });
+
+//Récupération de la galerie
+async function recupererGallery() {
+  const reponse = await fetch("http://localhost:5678/api/works/");
+  const projets = await reponse.json();
+  console.log(projets);
+}
+
+function afficherProjets(projets) {
+  // Récupération de l'élément
+  const divGallery = document.querySelector(".galleryModal");
+  for (let i = 0; i < projets.length; i++) {
+    const projet = projets[i];
+    const imageFigure = document.createElement("img");
+    imageFigure.src = projet.imageUrl;
+    divGallery.appendChild(imagefigure);
+  }
+}

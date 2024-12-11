@@ -362,4 +362,25 @@ footer nav ul {
   max-height: calc(100vh -20px);
   padding: 20px;
   background-color: white;
+  text-align: center;
+  border-radius: 10px;
+}
+
+h3 {
+  font-family: work sans;
+  font-size: 26px;
+}
+.fa-solid {
+  text-align: right;
+}
+
+.ajouterPhoto {
+  font-family: "Syne";
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  margin: 2em auto;
+  width: 180px;
+  text-align: center;
+  border-radius: 60px;
 }
