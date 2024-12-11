@@ -246,7 +246,7 @@ li a {
 }
 #portfolio h2 {
   text-align: center;
-  margin-bottom: 1em;
+  margin-bottom: ;
 }
 .gallery {
   width: 100%;
@@ -311,6 +311,16 @@ footer nav ul {
   justify-content: flex-end;
   margin: 2em;
 }
+.projets {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.icone {
+  margin-left: 20px;
+  display: none;
+}
 
 .filtres {
   display: flex;
@@ -333,4 +343,23 @@ footer nav ul {
 .filtre-actif {
   background-color: #1d6154;
   color: white;
+}
+.modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: (0, 0, 0, 0.8);
+}
+.modal-wrapper {
+  overflow: auto;
+  width: 600px;
+  max-width: calc(100vw -20px);
+  max-height: calc(100vh -20px);
+  padding: 20px;
+  background-color: white;
 }

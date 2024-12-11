@@ -82,3 +82,10 @@ recupererProjets().then((projets) => {
 recupererCategories().then((categories) => {
   afficherCategories(categories);
 });
+
+function afficherModifier(token) {
+  if (localStorage.getItem("token") != "") {
+    document.querySelector(".icone").style.display = "block";
+  }
+}
+afficherModifier();
