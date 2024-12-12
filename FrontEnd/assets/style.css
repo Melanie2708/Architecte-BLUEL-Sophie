@@ -371,6 +371,9 @@ h3 {
   font-family: work sans;
   font-size: 26px;
 }
+.btn-close {
+  text-align: end;
+}
 .js-modal-close {
   border: none;
   background-color: white;
@@ -406,7 +409,8 @@ h3 {
   width: 420px;
   margin-left: 80px;
 }
-.ajouterPhoto {
+.ajouterPhoto,
+.valider {
   font-family: "Syne";
   font-weight: 700;
   color: white;
@@ -416,4 +420,14 @@ h3 {
   text-align: center;
   border-radius: 60px;
   padding: 10px;
+}
+.galerie {
+  display: block;
+}
+.ajout {
+  display: none;
+}
+.return {
+  border: none;
+  background-color: white;
 }

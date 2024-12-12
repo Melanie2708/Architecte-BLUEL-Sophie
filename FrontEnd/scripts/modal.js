@@ -73,20 +73,39 @@ function afficherGallery(projets) {
     divGalleryItem.appendChild(iconeGallery);
   }
 }
+//Fonction pour changer de modal
+function cacherDiv() {
+  const galerie = document.querySelector(".galerie");
+  galerie.style.display = "none";
+  const ajout = document.querySelector(".ajout");
+  ajout.style.display = "block";
+}
+
+function afficherAjout() {
+  const buttonAjouterPhoto = document.querySelector(".ajouterPhoto");
+  buttonAjouterPhoto.addEventListener("click", function (event) {
+    event.preventDefault();
+    cacherDiv();
+  });
+}
+
+//Fonction de retour
+function afficherDiv() {
+  const galerie = document.querySelector(".galerie");
+  galerie.style.display = "block";
+  const ajout = document.querySelector(".ajout");
+  ajout.style.display = "none";
+}
+
+function retour() {
+  const boutonRetour = document.querySelector(".return");
+  boutonRetour.addEventListener("click", function (event) {
+    afficherDiv();
+  });
+}
 
 recupererGallery().then((projets) => {
   afficherGallery(projets);
 });
-
-//function afficherGallery(projets) {
-// Récupération de l'élément
-//const divGallery = document.querySelector(".galleryModal");
-//for (let i = 0; i < projets.length; i++) {
-//const projet = projets[i];
-//const figure = document.createElement("figure");
-//const imageGallery = document.createElement("img");
-//imageGallery.src = projet.imageUrl;
-//divGallery.appendChild(figure);
-//figure.appendChild(imageGallery);
-//}
-// }
+afficherAjout();
+retour();
