@@ -50,15 +50,43 @@ async function recupererGallery() {
   const reponse = await fetch("http://localhost:5678/api/works/");
   const projets = await reponse.json();
   console.log(projets);
+  return projets;
 }
 
-function afficherProjets(projets) {
+function afficherGallery(projets) {
   // Récupération de l'élément
   const divGallery = document.querySelector(".galleryModal");
   for (let i = 0; i < projets.length; i++) {
     const projet = projets[i];
-    const imageFigure = document.createElement("img");
-    imageFigure.src = projet.imageUrl;
-    divGallery.appendChild(imagefigure);
+
+    const divGalleryItem = document.createElement("galleryItem");
+    divGallery.appendChild(divGalleryItem);
+    divGalleryItem.classList.add("galleryItem");
+    const imageGallery = document.createElement("img");
+    imageGallery.src = projet.imageUrl;
+    divGalleryItem.appendChild(imageGallery);
+
+    const iconeGallery = document.createElement("i");
+    iconeGallery.classList.add("fa-solid");
+    iconeGallery.classList.add("fa-trash-can");
+    iconeGallery.classList.add("iconeGallery");
+    divGalleryItem.appendChild(iconeGallery);
   }
 }
+
+recupererGallery().then((projets) => {
+  afficherGallery(projets);
+});
+
+//function afficherGallery(projets) {
+// Récupération de l'élément
+//const divGallery = document.querySelector(".galleryModal");
+//for (let i = 0; i < projets.length; i++) {
+//const projet = projets[i];
+//const figure = document.createElement("figure");
+//const imageGallery = document.createElement("img");
+//imageGallery.src = projet.imageUrl;
+//divGallery.appendChild(figure);
+//figure.appendChild(imageGallery);
+//}
+// }

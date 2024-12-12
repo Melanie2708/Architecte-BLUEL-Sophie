@@ -344,6 +344,7 @@ footer nav ul {
   background-color: #1d6154;
   color: white;
 }
+
 .modal {
   position: fixed;
   display: flex;
@@ -360,7 +361,7 @@ footer nav ul {
   width: 600px;
   max-width: calc(100vw -20px);
   max-height: calc(100vh -20px);
-  padding: 20px;
+  padding: 80px;
   background-color: white;
   text-align: center;
   border-radius: 10px;
@@ -370,17 +371,49 @@ h3 {
   font-family: work sans;
   font-size: 26px;
 }
-.fa-solid {
-  text-align: right;
+.js-modal-close {
+  border: none;
+  background-color: white;
+}
+.galleryModal {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 0fr 0fr 0fr 0fr 0fr;
+  grid-row-gap: 25px;
+  grid-column-gap: 10px;
+  margin-top: 30px;
 }
 
+.galleryItem {
+  position: relative;
+}
+.galleryModal img {
+  width: 76px;
+  height: 102px;
+}
+.iconeGallery {
+  position: absolute;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: black;
+  right: 3px;
+  top: 3px;
+}
+.bordure {
+  border-top: solid 1px #b3b3b3;
+  margin-top: 50px;
+  width: 420px;
+  margin-left: 80px;
+}
 .ajouterPhoto {
   font-family: "Syne";
   font-weight: 700;
   color: white;
   background-color: #1d6154;
   margin: 2em auto;
-  width: 180px;
+  width: 200px;
   text-align: center;
   border-radius: 60px;
+  padding: 10px;
 }
