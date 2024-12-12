@@ -78,7 +78,7 @@ function cacherDiv() {
   const galerie = document.querySelector(".galerie");
   galerie.style.display = "none";
   const ajout = document.querySelector(".ajout");
-  ajout.style.display = "block";
+  ajout.style.display = "flex";
 }
 
 function afficherAjout() {
@@ -92,7 +92,7 @@ function afficherAjout() {
 //Fonction de retour
 function afficherDiv() {
   const galerie = document.querySelector(".galerie");
-  galerie.style.display = "block";
+  galerie.style.display = "flex";
   const ajout = document.querySelector(".ajout");
   ajout.style.display = "none";
 }
@@ -103,6 +103,33 @@ function retour() {
     afficherDiv();
   });
 }
+
+//Affichage cadre
+const cadre = document.querySelector(".cadreAjout");
+const iconeImage = document.createElement("i");
+iconeImage.classList.add("fa-regular", "fa-image", "iconeImage");
+cadre.appendChild(iconeImage);
+
+const btnPhoto = document.createElement("button");
+btnPhoto.classList.add("btnPhoto");
+cadre.appendChild(btnPhoto);
+
+const ajouterPhotoI = document.createElement("input");
+ajouterPhotoI.classList.add("buttonAjouterPhotoI");
+ajouterPhotoI.type = "file";
+ajouterPhotoI.accept = ".jpg, .png";
+ajouterPhotoI.setAttribute("id", "fileInput");
+btnPhoto.appendChild(ajouterPhotoI);
+
+const ajouterPhotoL = document.createElement("label");
+ajouterPhotoL.classList.add("ajouterPhotoL");
+ajouterPhotoL.setAttribute("for", "fileInput");
+ajouterPhotoL.textContent = "+ Ajouter photo";
+btnPhoto.appendChild(ajouterPhotoL);
+
+const texte = document.createElement("p");
+texte.textContent = "jpg, png : 4mo max";
+cadre.appendChild(texte);
 
 recupererGallery().then((projets) => {
   afficherGallery(projets);
