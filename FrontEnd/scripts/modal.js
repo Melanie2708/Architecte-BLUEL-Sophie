@@ -70,9 +70,25 @@ function afficherGallery(projets) {
     iconeGallery.classList.add("fa-solid");
     iconeGallery.classList.add("fa-trash-can");
     iconeGallery.classList.add("iconeGallery");
+    iconeGallery.id = projet.id;
+    iconeGallery.addEventListener("click", function (event) {
+      removeProjet(iconeGallery.id);
+    });
     divGalleryItem.appendChild(iconeGallery);
   }
 }
+
+async function removeProjet(projetId) {
+  const url = "http://localhost:5678/api/works/" + projetId;
+  const header = "Bearer " + localStorage.getItem("token");
+  console.log(url);
+  console.log(header);
+  const reponse = await fetch(url, {
+    method: "DELETE",
+    headers: { Authorization: header },
+  });
+}
+
 //Fonction pour changer de modal
 async function afficherAjoutPhoto() {
   const galerie = document.querySelector(".galerie");

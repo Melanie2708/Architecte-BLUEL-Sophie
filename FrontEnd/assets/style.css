@@ -403,6 +403,7 @@ h3 {
   background-color: black;
   right: 3px;
   top: 3px;
+  cursor: pointer;
 }
 .bordure {
   border-top: solid 1px #b3b3b3;
