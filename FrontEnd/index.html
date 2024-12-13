@@ -55,8 +55,7 @@
           <div class="projets">
             <h2>Mes Projets</h2>
             <div class="icone">
-              <i class="fa-regular fa-pen-to-square"></i>
-              <a href="#modal" class="js-modal">modifier</a>
+              <a href="#modal" class="js-modal"><i class="fa-regular fa-pen-to-square"></i> modifier</a>
               <aside
                 id="modal"
                 class="modal"
@@ -66,27 +65,36 @@
                 style="display: none"
               >
                 <div class="modal-wrapper js-modal-stop">
-                  <div class="btn-close">
+                  <div class="modal-buttons">
+                    <button class="return"><i class="fa-solid fa-arrow-left"></i></button>
+                    <div class="spacer"></div>
                     <button class="js-modal-close"><i class="fa-solid fa-x"></i></button>
                   </div>
                   <div class="galerie">
                     <h3 class="titleModal">Galerie photo</h3>
                     <div class="galleryModal"></div>
-
                     <div class="bordure">
                       <button class="ajouterPhoto">Ajouter une photo</button>
                     </div>
                   </div>
                   <div class="ajout">
-                    <div class="btn-return">
-                      <button class="return"><i class="fa-solid fa-arrow-left"></i></button>
-                    </div>
                     <h3>Ajout photo</h3>
                     <div class="ajoutPhoto"></div>
-                    <div class="cadreAjout"></div>
-                    <div class="bordure">
-                      <button class="valider">Valider</button>
+                    <div class="cadreAjout">
+                      <i class="fa-regular fa-image iconeImage"></i>
+                      <input id="fileInput" class="buttonAjouterPhotoI" type="file" accept=".jpg, .png" />
+                      <label class="ajouterPhotoL" for="fileInput">+ Ajouter photo</label>
+                      <p>jpg, png : 4mo max</p>
                     </div>
+                    <form id="formulaire-ajout-photo" method="post">
+                      <label for="text-ajout-photo">Titre</label>
+                      <input type="text" name="text-ajout-photo" id="text-ajout-photo" />
+                      <label for="categorie-ajout-photo">Categorie</label>
+                      <select name="categorie-ajout-photo" id="categorie-ajout-photo"></select>
+                      <div class="bordure">
+                        <input type="submit" class="valider" value="Valider" />
+                      </div>
+                    </form>
                   </div>
                 </div>
               </aside>

@@ -20,7 +20,7 @@ const closeModal = function (event) {
   modal.style.display = "none";
   modal.setAttribute("aria-hidden", "true");
   modal.removeAttribute("aria-modal");
-  modal.addEventListener("click", closeModal);
+  modal.removeEventListener("click", closeModal);
   modal.querySelector(".js-modal-close").removeEventListener("click", closeModal);
   modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
   modal = null;
@@ -74,62 +74,55 @@ function afficherGallery(projets) {
   }
 }
 //Fonction pour changer de modal
-function cacherDiv() {
+async function afficherAjoutPhoto() {
   const galerie = document.querySelector(".galerie");
   galerie.style.display = "none";
   const ajout = document.querySelector(".ajout");
   ajout.style.display = "flex";
+  document.querySelector(".return").style.display = "block";
+  const categories = await recupererCategories();
+
+  const selectCategorie = document.getElementById("categorie-ajout-photo");
+  categories.forEach((categorie) => {
+    const optionCategorie = document.createElement("option");
+    optionCategorie.value = categorie.id;
+    optionCategorie.innerText = categorie.name;
+    selectCategorie.appendChild(optionCategorie);
+  });
 }
 
 function afficherAjout() {
   const buttonAjouterPhoto = document.querySelector(".ajouterPhoto");
   buttonAjouterPhoto.addEventListener("click", function (event) {
     event.preventDefault();
-    cacherDiv();
+    afficherAjoutPhoto();
   });
 }
 
 //Fonction de retour
-function afficherDiv() {
+function afficherGalerie() {
   const galerie = document.querySelector(".galerie");
   galerie.style.display = "flex";
   const ajout = document.querySelector(".ajout");
   ajout.style.display = "none";
+  document.querySelector(".return").style.display = "none";
 }
 
 function retour() {
   const boutonRetour = document.querySelector(".return");
   boutonRetour.addEventListener("click", function (event) {
-    afficherDiv();
+    afficherGalerie();
   });
 }
 
-//Affichage cadre
-const cadre = document.querySelector(".cadreAjout");
-const iconeImage = document.createElement("i");
-iconeImage.classList.add("fa-regular", "fa-image", "iconeImage");
-cadre.appendChild(iconeImage);
+//Récupérer les catégories
+async function recupererCategories() {
+  const reponse = await fetch("http://localhost:5678/api/categories");
+  const categories = await reponse.json();
+  return categories;
+}
 
-const btnPhoto = document.createElement("button");
-btnPhoto.classList.add("btnPhoto");
-cadre.appendChild(btnPhoto);
-
-const ajouterPhotoI = document.createElement("input");
-ajouterPhotoI.classList.add("buttonAjouterPhotoI");
-ajouterPhotoI.type = "file";
-ajouterPhotoI.accept = ".jpg, .png";
-ajouterPhotoI.setAttribute("id", "fileInput");
-btnPhoto.appendChild(ajouterPhotoI);
-
-const ajouterPhotoL = document.createElement("label");
-ajouterPhotoL.classList.add("ajouterPhotoL");
-ajouterPhotoL.setAttribute("for", "fileInput");
-ajouterPhotoL.textContent = "+ Ajouter photo";
-btnPhoto.appendChild(ajouterPhotoL);
-
-const texte = document.createElement("p");
-texte.textContent = "jpg, png : 4mo max";
-cadre.appendChild(texte);
+//Afficher les catégories dans le input
 
 recupererGallery().then((projets) => {
   afficherGallery(projets);

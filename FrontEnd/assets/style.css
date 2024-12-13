@@ -378,6 +378,7 @@ h3 {
 .js-modal-close {
   border: none;
   background-color: white;
+  cursor: pointer;
 }
 .galleryModal {
   display: grid;
@@ -439,6 +440,17 @@ h3 {
 .return {
   border: none;
   background-color: white;
+  display: none;
+  cursor: pointer;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: end;
+}
+
+.spacer {
+  flex-grow: 1;
 }
 
 .cadreAjout {
@@ -457,7 +469,7 @@ h3 {
 .buttonAjouterPhotoI {
   display: none;
 }
-.btnPhoto {
+.ajouterPhotoL {
   font-family: "Syne";
   color: #1d6154;
   font-weight: 700;
@@ -472,3 +484,33 @@ h3 {
   padding: 10px;
   border: none;
 }
+
+#formulaire-ajout-photo {
+  display: flex;
+  flex-direction: column;
+}
+
+#formulaire-ajout-photo label {
+  margin: 1em 0 1em 0;
+  text-align: left;
+}
+
+#formulaire-ajout-photo input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#formulaire-ajout-photo select {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+.formTitre .formInput;

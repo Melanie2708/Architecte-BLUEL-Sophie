@@ -1,6 +1,14 @@
 //import { ajoutClicNavigation } from "./navigation.js";
-//Fonction pour afficher les travaux
 
+if (!localStorage.getItem("token")) {
+  // Sélectionne l'élément avec la classe js-modal
+  const modalLink = document.querySelector(".js-modal");
+  // Supprime l'élément du DOM
+  if (modalLink) {
+    modalLink.remove();
+  }
+}
+//Fonction pour afficher les travaux
 async function recupererProjets() {
   const reponse = await fetch("http://localhost:5678/api/works");
   const projets = await reponse.json();
