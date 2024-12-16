@@ -24,7 +24,14 @@ const closeModal = function (event) {
   modal.querySelector(".js-modal-close").removeEventListener("click", closeModal);
   modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
   modal = null;
+  if (closeCallback !== null) {
+    closeCallback();
+  }
 };
+
+export function ajoutCloseModalCallback(callback) {
+  closeCallback = callback;
+}
 
 //Fonction pour que le modal ne se ferme pas au clic à l'intérieur
 const stopPropagation = function (event) {
@@ -55,7 +62,9 @@ async function recupererGallery() {
 
 function afficherGallery(projets) {
   // Récupération de l'élément
+
   const divGallery = document.querySelector(".galleryModal");
+  divGallery.innerHTML = "";
   for (let i = 0; i < projets.length; i++) {
     const projet = projets[i];
 
@@ -78,6 +87,7 @@ function afficherGallery(projets) {
   }
 }
 
+//Fonction pour supprimer un projet
 async function removeProjet(projetId) {
   const url = "http://localhost:5678/api/works/" + projetId;
   const header = "Bearer " + localStorage.getItem("token");
@@ -87,6 +97,11 @@ async function removeProjet(projetId) {
     method: "DELETE",
     headers: { Authorization: header },
   });
+  if (reponse.status === 204) {
+    recupererGallery().then((projets) => {
+      afficherGallery(projets);
+    });
+  }
 }
 
 //Fonction pour changer de modal
@@ -138,10 +153,16 @@ async function recupererCategories() {
   return categories;
 }
 
-//Afficher les catégories dans le input
+//Partie principale
+
+let closeCallback = null;
 
 recupererGallery().then((projets) => {
   afficherGallery(projets);
 });
 afficherAjout();
 retour();
+
+ajoutCloseModalCallback(() => {
+  displayWorks();
+});

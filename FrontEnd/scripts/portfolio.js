@@ -1,4 +1,5 @@
 //import { ajoutClicNavigation } from "./navigation.js";
+import { ajoutCloseModalCallback } from "./modal.js";
 
 if (!localStorage.getItem("token")) {
   // Sélectionne l'élément avec la classe js-modal
