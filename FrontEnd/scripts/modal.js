@@ -162,7 +162,3 @@ recupererGallery().then((projets) => {
 });
 afficherAjout();
 retour();
-
-ajoutCloseModalCallback(() => {
-  displayWorks();
-});

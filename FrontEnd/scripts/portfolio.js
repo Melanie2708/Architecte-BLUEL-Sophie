@@ -98,3 +98,11 @@ function afficherModifier(token) {
   }
 }
 afficherModifier();
+
+// Ajout d'une fonction a appeler lors de la fermeture de la modale
+ajoutCloseModalCallback(() => {
+  recupererProjets().then((projets) => {
+    tousProjets = projets;
+    afficherProjets(tousProjets, 0);
+  });
+});
