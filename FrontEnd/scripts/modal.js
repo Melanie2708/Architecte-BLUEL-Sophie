@@ -12,6 +12,9 @@ const openModal = function (event) {
   modal.addEventListener("click", closeModal);
   modal.querySelector(".js-modal-close").addEventListener("click", closeModal);
   modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation);
+  recupererGallery().then((projets) => {
+    afficherGallery(projets);
+  });
 };
 
 const closeModal = function (event) {
@@ -56,7 +59,6 @@ window.addEventListener("keydown", function (event) {
 async function recupererGallery() {
   const reponse = await fetch("http://localhost:5678/api/works/");
   const projets = await reponse.json();
-  console.log(projets);
   return projets;
 }
 
@@ -91,8 +93,6 @@ function afficherGallery(projets) {
 async function removeProjet(projetId) {
   const url = "http://localhost:5678/api/works/" + projetId;
   const header = "Bearer " + localStorage.getItem("token");
-  console.log(url);
-  console.log(header);
   const reponse = await fetch(url, {
     method: "DELETE",
     headers: { Authorization: header },
@@ -111,9 +111,14 @@ async function afficherAjoutPhoto() {
   const ajout = document.querySelector(".ajout");
   ajout.style.display = "flex";
   document.querySelector(".return").style.display = "block";
+
+  resetFormulaire();
+
   const categories = await recupererCategories();
 
   const selectCategorie = document.getElementById("categorie-ajout-photo");
+
+  selectCategorie.innerHTML = "";
   categories.forEach((categorie) => {
     const optionCategorie = document.createElement("option");
     optionCategorie.value = categorie.id;
@@ -142,8 +147,45 @@ function afficherGalerie() {
 function retour() {
   const boutonRetour = document.querySelector(".return");
   boutonRetour.addEventListener("click", function (event) {
+    recupererGallery().then((projets) => {
+      afficherGallery(projets);
+    });
     afficherGalerie();
   });
+}
+
+//Ajour d'un projet
+function ajoutImageTelechargee() {
+  document.getElementById("fileInput").addEventListener("change", function (event) {
+    const file = event.target.files[0]; // Récupère le fichier sélectionné
+    if (file && file.type.startsWith("image/")) {
+      // Vérifie que c'est une image
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const imageTelecharge = document.getElementById("imageTelechargee");
+        imageTelecharge.src = e.target.result; // Définit la source de l'image
+        imageTelecharge.style.display = "flex"; // Affiche l'image
+        imageAjout.style.display = "none";
+      };
+      reader.readAsDataURL(file); // Lit le fichier comme une URL
+    }
+    verificationFormulaire();
+  });
+}
+
+function verificationFormulaire() {
+  if (
+    document.getElementById("text-ajout-photo").value !== "" &&
+    document.getElementById("fileInput").files.length !== 0
+  ) {
+    document.getElementById("btnValider").classList.remove("validerErreur");
+    document.getElementById("btnValider").classList.add("validerOK");
+    document.getElementById("btnValider").disabled = false;
+  } else {
+    document.getElementById("btnValider").classList.add("validerErreur");
+    document.getElementById("btnValider").classList.remove("validerOK");
+    document.getElementById("btnValider").disabled = true;
+  }
 }
 
 //Récupérer les catégories
@@ -151,6 +193,60 @@ async function recupererCategories() {
   const reponse = await fetch("http://localhost:5678/api/categories");
   const categories = await reponse.json();
   return categories;
+}
+
+//Validation du formulaire
+function validerFormulaire() {
+  const formulaireAjoutPhoto = document.getElementById("formulaire-ajout-photo");
+  formulaireAjoutPhoto.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (
+      document.getElementById("text-ajout-photo").value === "" ||
+      document.getElementById("fileInput").files.length === 0
+    ) {
+      document.getElementById("messageAjout").innerText = "Erreur dans le formulaire";
+    } else {
+      const header = "Bearer " + localStorage.getItem("token");
+
+      const image = document.getElementById("fileInput").files[0];
+      const titre = document.getElementById("text-ajout-photo").value;
+      const categorie = document.getElementById("categorie-ajout-photo").value;
+
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("title", titre);
+      formData.append("category", categorie);
+
+      fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: { Authorization: header },
+        body: formData,
+      }).then((reponse) => {
+        if (reponse.status === 201) {
+          resetFormulaire();
+          document.getElementById("messageAjout").innerText = "Projet ajouté";
+        } else {
+          document.getElementById("messageAjout").innerText = "Erreur dans l'ajout du projet";
+        }
+      });
+    }
+  });
+
+  const textInput = document.getElementById("text-ajout-photo");
+  textInput.addEventListener("input", (event) => {
+    verificationFormulaire();
+  });
+}
+
+function resetFormulaire() {
+  document.getElementById("imageAjout").style.display = "flex";
+  document.getElementById("imageTelechargee").style.display = "none";
+  document.getElementById("btnValider").classList.add("validerErreur");
+  document.getElementById("btnValider").classList.remove("validerOK");
+  document.getElementById("formulaire-ajout-photo").reset();
+  document.getElementById("btnValider").disabled = true;
+  document.getElementById("messageAjout").innerText = "";
 }
 
 //Partie principale
@@ -162,3 +258,5 @@ recupererGallery().then((projets) => {
 });
 afficherAjout();
 retour();
+ajoutImageTelechargee();
+validerFormulaire();

@@ -9,7 +9,6 @@ async function connexion() {
     body: JSON.stringify({ email: email, password: password }),
   });
 
-  console.log(reponse);
   if (reponse.status === 404) {
     messageErreur.innerText = "Utilisateur inconnu";
   } else if (reponse.status === 401) {
