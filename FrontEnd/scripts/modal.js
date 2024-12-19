@@ -63,8 +63,6 @@ async function recupererGallery() {
 }
 
 function afficherGallery(projets) {
-  // Récupération de l'élément
-
   const divGallery = document.querySelector(".galleryModal");
   divGallery.innerHTML = "";
   for (let i = 0; i < projets.length; i++) {
@@ -105,7 +103,7 @@ async function removeProjet(projetId) {
 }
 
 //Fonction pour changer de modal
-async function afficherAjoutPhoto() {
+async function afficherModalAjoutPhoto() {
   const galerie = document.querySelector(".galerie");
   galerie.style.display = "none";
   const ajout = document.querySelector(".ajout");
@@ -117,8 +115,14 @@ async function afficherAjoutPhoto() {
   const categories = await recupererCategories();
 
   const selectCategorie = document.getElementById("categorie-ajout-photo");
-
   selectCategorie.innerHTML = "";
+
+  const optionVide = document.createElement("option");
+  optionVide.disabled = true;
+  optionVide.selected = true;
+  optionVide.innerText = "";
+  selectCategorie.appendChild(optionVide);
+
   categories.forEach((categorie) => {
     const optionCategorie = document.createElement("option");
     optionCategorie.value = categorie.id;
@@ -131,12 +135,12 @@ function afficherAjout() {
   const buttonAjouterPhoto = document.querySelector(".ajouterPhoto");
   buttonAjouterPhoto.addEventListener("click", function (event) {
     event.preventDefault();
-    afficherAjoutPhoto();
+    afficherModalAjoutPhoto();
   });
 }
 
 //Fonction de retour
-function afficherGalerie() {
+function afficherModalGalerie() {
   const galerie = document.querySelector(".galerie");
   galerie.style.display = "flex";
   const ajout = document.querySelector(".ajout");
@@ -150,7 +154,7 @@ function retour() {
     recupererGallery().then((projets) => {
       afficherGallery(projets);
     });
-    afficherGalerie();
+    afficherModalGalerie();
   });
 }
 
@@ -176,7 +180,8 @@ function ajoutImageTelechargee() {
 function verificationFormulaire() {
   if (
     document.getElementById("text-ajout-photo").value !== "" &&
-    document.getElementById("fileInput").files.length !== 0
+    document.getElementById("fileInput").files.length !== 0 &&
+    document.getElementById("categorie-ajout-photo").value !== ""
   ) {
     document.getElementById("btnValider").classList.remove("validerErreur");
     document.getElementById("btnValider").classList.add("validerOK");
@@ -192,6 +197,7 @@ function verificationFormulaire() {
 async function recupererCategories() {
   const reponse = await fetch("http://localhost:5678/api/categories");
   const categories = await reponse.json();
+
   return categories;
 }
 
@@ -203,7 +209,8 @@ function validerFormulaire() {
 
     if (
       document.getElementById("text-ajout-photo").value === "" ||
-      document.getElementById("fileInput").files.length === 0
+      document.getElementById("fileInput").files.length === 0 ||
+      document.getElementById("categorie-ajout-photo").value === ""
     ) {
       document.getElementById("messageAjout").innerText = "Erreur dans le formulaire";
     } else {
@@ -247,6 +254,7 @@ function resetFormulaire() {
   document.getElementById("formulaire-ajout-photo").reset();
   document.getElementById("btnValider").disabled = true;
   document.getElementById("messageAjout").innerText = "";
+  document.getElementById("categorie-ajout-photo").value = "";
 }
 
 //Partie principale
