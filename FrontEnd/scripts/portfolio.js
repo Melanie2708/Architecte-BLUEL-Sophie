@@ -1,4 +1,3 @@
-//import { ajoutClicNavigation } from "./navigation.js";
 import { ajoutCloseModalCallback } from "./modal.js";
 
 if (!localStorage.getItem("token")) {
@@ -80,10 +79,24 @@ function afficherCategories(categories) {
   }
 }
 
+function logout() {
+  const token = localStorage.getItem("token");
+  if (token) {
+    const loginLink = document.getElementById("lien-login");
+    if (loginLink) {
+      loginLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        localStorage.clear("token");
+        location.reload();
+      });
+    }
+  }
+}
+
 //Partie principale du script
 
 let tousProjets = {};
-//ajoutClicNavigation();
+
 recupererProjets().then((projets) => {
   tousProjets = projets;
   afficherProjets(tousProjets, 0);
@@ -102,12 +115,6 @@ function afficherModifier(token) {
 }
 afficherModifier();
 
-function removeFiltres(filtres) {
-  if (localStorage.getItem("token").value != "") {
-    document.querySelector(".filtres").style.display = "none";
-  }
-}
-
 // Ajout d'une fonction a appeler lors de la fermeture de la modale
 ajoutCloseModalCallback(() => {
   recupererProjets().then((projets) => {
@@ -115,3 +122,5 @@ ajoutCloseModalCallback(() => {
     afficherProjets(tousProjets, 0);
   });
 });
+
+logout();
