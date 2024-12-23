@@ -9,10 +9,8 @@ async function connexion() {
     body: JSON.stringify({ email: email, password: password }),
   });
 
-  if (reponse.status === 404) {
-    messageErreur.innerText = "Utilisateur inconnu";
-  } else if (reponse.status === 401) {
-    messageErreur.innerText = "Mot de passe erroné";
+  if (reponse.status === 404 || reponse.status === 401) {
+    messageErreur.innerText = "Erreur dans l'identifiant ou le mot de passe";
   } else if (reponse.status === 200) {
     const infoConnexion = await reponse.json();
     localStorage.setItem("token", infoConnexion.token);

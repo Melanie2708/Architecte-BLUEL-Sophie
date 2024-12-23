@@ -93,11 +93,20 @@ recupererCategories().then((categories) => {
 });
 
 function afficherModifier(token) {
-  if (localStorage.getItem("token") != "") {
+  if (localStorage.getItem("token").value != "") {
     document.querySelector(".icone").style.display = "block";
+    document.querySelector(".modeEdition").style.display = "block";
+    document.querySelector(".filtres").style.display = "none";
+    document.getElementById("lien-login").innerText = "logout";
   }
 }
 afficherModifier();
+
+function removeFiltres(filtres) {
+  if (localStorage.getItem("token").value != "") {
+    document.querySelector(".filtres").style.display = "none";
+  }
+}
 
 // Ajout d'une fonction a appeler lors de la fermeture de la modale
 ajoutCloseModalCallback(() => {
