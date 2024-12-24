@@ -244,6 +244,10 @@ function validerFormulaire() {
   textInput.addEventListener("input", (event) => {
     verificationFormulaire();
   });
+  const listeCategorie = document.getElementById("categorie-ajout-photo");
+  listeCategorie.addEventListener("change", () => {
+    verificationFormulaire();
+  });
 }
 
 function resetFormulaire() {
