@@ -106,11 +106,13 @@ recupererCategories().then((categories) => {
 });
 
 function afficherModifier(token) {
-  if (localStorage.getItem("token").value != "") {
-    document.querySelector(".icone").style.display = "block";
-    document.querySelector(".modeEdition").style.display = "block";
-    document.querySelector(".filtres").style.display = "none";
-    document.getElementById("lien-login").innerText = "logout";
+  if (localStorage.getItem("token")) {
+    if (localStorage.getItem("token").value != "") {
+      document.querySelector(".icone").style.display = "block";
+      document.querySelector(".modeEdition").style.display = "block";
+      document.querySelector(".filtres").style.display = "none";
+      document.getElementById("lien-login").innerText = "logout";
+    }
   }
 }
 afficherModifier();

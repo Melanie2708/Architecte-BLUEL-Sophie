@@ -222,6 +222,11 @@ li a {
   text-decoration: underline;
   margin-bottom: 50px;
 }
+
+#message-erreur {
+  color: red;
+  margin-bottom: 15px;
+}
 #introduction {
   display: flex;
   align-items: center;
@@ -262,11 +267,12 @@ li a {
   height: 100%;
   object-fit: cover;
 }
-
+.gallery figure {
+  margin-bottom: 20px;
+}
 .gallery figcaption {
   margin-top: 5px;
 }
-
 #contact {
   width: 50%;
   margin: auto;
