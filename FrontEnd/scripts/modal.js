@@ -2,6 +2,7 @@ let modal = null;
 const focusableSelector = "button, a, input, textarea";
 let focusables = [];
 
+//Modale
 const openModal = function (event) {
   event.preventDefault();
   modal = document.querySelector(event.target.getAttribute("href"));

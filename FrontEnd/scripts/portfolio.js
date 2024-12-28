@@ -8,7 +8,8 @@ if (!localStorage.getItem("token")) {
     modalLink.remove();
   }
 }
-//Fonction pour afficher les travaux
+
+//Fonction pour récupérer les travaux
 async function recupererProjets() {
   const reponse = await fetch("http://localhost:5678/api/works");
   const projets = await reponse.json();
