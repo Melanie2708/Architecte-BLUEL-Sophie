@@ -159,7 +159,7 @@ function retour() {
   });
 }
 
-//Ajour d'un projet
+//Ajout d'un projet
 function ajoutImageTelechargee() {
   document.getElementById("fileInput").addEventListener("change", function (event) {
     const file = event.target.files[0]; // Récupère le fichier sélectionné
